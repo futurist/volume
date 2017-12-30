@@ -1,4 +1,22 @@
-﻿var Win32Volume = require('win32-volume');
+﻿var Win32Volume = require('win32-volume')
+var hide = require('node-hide')
+
+const cmdWindows = []
+hide.visableWindows(function(data){
+    console.log(JSON.stringify(data)) //List all the Visable Windows
+    for(let i in data){
+        if(data[i].indexOf('cmd.exe')>-1) {
+            console.log('hide', i)
+            cmdWindows.push(+i)
+            hide.hideWindow(+i)
+        }
+    }
+})
+function showAllWindow(isShow){
+    cmdWindows.forEach(i=>hide.showWindow(i))
+}
+
+// setTimeout(showAllWindow, 3000)
 
 // Win32Volume.setVolume(0.7, function (success) {
 //     console.log('setVolume:', success);
@@ -45,6 +63,7 @@ function key_down(keycode) { // A function that converts the keycode to hexadeci
     if(keycode==KeyNames['F10']) Win32Volume.setMuteSync(isMute^=1)
     if(keycode==KeyNames['CTRL']) isCtrl = true
     if(keycode==KeyNames['SHIFT']) isShift = true
+    if(keycode==KeyNames['F12'] && isCtrl && isShift) showAllWindow()
     console.log('cur volume:', isMute, vol)
 }
 

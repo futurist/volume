@@ -12,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "node-cleanup": "^2.1.2",
+    "node-hide": "^1.3.1",
     "node-win32-keyhook": "^1.0.7",
     "win32-volume": "^1.0.2"
   }
