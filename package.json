@@ -1,0 +1,18 @@
+{
+  "name": "volume",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "node-cleanup": "^2.1.2",
+    "node-win32-keyhook": "^1.0.7",
+    "win32-volume": "^1.0.2"
+  }
+}
