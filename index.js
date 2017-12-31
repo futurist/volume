@@ -1,7 +1,8 @@
 ﻿var Win32Volume = require('win32-volume')
 var hide = require('node-hide')
 
-const cmdWindows = []
+var isShowWindow = false
+var cmdWindows = []
 hide.visableWindows(function(data){
     console.log(JSON.stringify(data)) //List all the Visable Windows
     for(let i in data){
@@ -12,8 +13,9 @@ hide.visableWindows(function(data){
         }
     }
 })
+
 function showAllWindow(isShow){
-    cmdWindows.forEach(i=>hide.showWindow(i))
+    cmdWindows.forEach(i=>hide[isShow?'showWindow':'hideWindow'](i))
 }
 
 // setTimeout(showAllWindow, 3000)
@@ -63,7 +65,7 @@ function key_down(keycode) { // A function that converts the keycode to hexadeci
     if(keycode==KeyNames['F10']) Win32Volume.setMuteSync(isMute^=1)
     if(keycode==KeyNames['CTRL']) isCtrl = true
     if(keycode==KeyNames['SHIFT']) isShift = true
-    if(keycode==KeyNames['F12'] && isCtrl && isShift) showAllWindow()
+    if(keycode==KeyNames['F12'] && isCtrl && isShift) showAllWindow(isShowWindow^=1)
     console.log('cur volume:', isMute, vol)
 }
 
